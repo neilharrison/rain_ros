@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- (0) SETTING PARAMETERS -->
+  <arg name="limited" default="false"  doc="If true, limits joint range [-PI, PI] on all joints." />
+  <arg name="paused" default="true" doc="Starts gazebo in paused mode" />
+  <arg name="gui" default="true" doc="Starts gazebo gui" />
+  <arg name="gripper" default="none" doc="Choose either 'none', 'robotiq_3f'." />
+  <arg name="camera" default="false" doc="If true, you will have three 2D cameras" />
+
+
+  <!-- ### (1) LOAD THE WORLD ### -->
+  <!-- startup simulated world -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" default="$(find rain_gazebo)/worlds/test_picking.world"/>
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="gui" value="$(arg gui)"/>
+  </include>
+
+
+  <!-- ### (2) LOAD THE ROBOT ### -->
+  <!-- send robot urdf info to param server -->
+  <include file="$(find rain_description)/launch/rain_upload.launch">
+    <arg name="limited" value="$(arg limited)"/>
+    <arg name='gripper' value="$(arg gripper)"/>
+  </include>
+
+
+
+  <!-- push robot_description to factory and spawn robot in gazebo -->
+  <node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model" 
+        args="-urdf -param robot_description -model robot -z 0.0 -J robot::shoulder_pan_joint -0.4001 -J robot::shoulder_lift_joint -1.9519 -J robot::elbow_joint 1.9478 -J robot::wrist_1_joint 6.2050 -J robot::wrist_2_joint 1.1327 -J robot::wrist_3_joint 3.9964" respawn="false"  output="screen"/>
+
+  <!-- push env_description to factory and spawn robot in gazebo (if camera is True ) -->
+  <group if="$(arg camera)">
+    <node name="spawn_env_model" pkg="gazebo_ros" type="spawn_model" 
+        args="-urdf -param env_description -model test_env" respawn="false" output="screen"/>
+  </group>
+
+
+  <!-- ### (3) SPAWN THE ROBOT ### -->
+  <!-- start joint_state_controller -->
+  <!-- <include file="$(find rain_gazebo)/launch/controller_utils.launch"/> -->
+  
+
+  <!-- load controller settings (for UR5) -->
+  <rosparam file="$(find rain_gazebo)/controller/arm_controller_ur5.yaml" command="load"/>
+
+  <!-- spawn controller manager -->  
+  <node name="ros_control_controller_spawner" pkg="controller_manager" type="controller_manager" args="spawn joint_group_position_controller" respawn="false" output="screen"/>
+
+  <!-- load relaxedIKbridge (connects relaxedIK outputs to Gazebo)-->
+  <node pkg="rain_gazebo" name="relaxedIKBridge" type="relaxedIKBridge.py" output="screen"/>
+
+
+  <!-- load other controllers  - neil removed joint_group_vel_controller-->
+  <!-- <node name="ros_control_controller_manager" pkg="controller_manager" type="controller_manager" respawn="false" output="screen" args="load joint_group_position_controller " /> -->
+
+  <!-- TODO: load 3 finger controller -->
+  <group if="$(eval gripper == 'robotiq_3f')">
+    <!-- load controller settings (for 3-finger Gripper) -->
+    <rosparam file="$(find rain_gazebo)/controller/robotiq_3f_controller.yaml" command="load"/>
+
+    <!-- spawn controller manager -->  
+    <node name="gripper_controller_spawner" pkg="controller_manager" type="controller_manager" args="spawn robotiq_3f_controller" respawn="false" output="screen"/>
+  </group>
+
+</launch>

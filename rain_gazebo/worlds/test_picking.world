@@ -557,7 +557,7 @@
       <allow_auto_disable>1</allow_auto_disable>
       <pose frame=''>0.82506 -0.276053 -0.000181 -0.000128 0.000261 -1.60303</pose>
     </model>
-    <model name='object'>
+    <!-- <model name='object'>
       <link name='link'>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <inertial>
@@ -656,7 +656,7 @@
       </link>
       <static>0</static>
       <allow_auto_disable>1</allow_auto_disable>
-      <pose frame=''>0.86685 -0.229617 1.19871 -1e-06 8e-06 0.047998</pose>
+      <pose frame=''>0.86685 -0.229617 0.1 -1e-06 8e-06 0.047998</pose>
     </model>
     <model name='object_clone'>
       <link name='link'>
@@ -757,7 +757,11 @@
       </link>
       <static>0</static>
       <allow_auto_disable>1</allow_auto_disable>
-      <pose frame=''>0.469332 -0.417521 1.09212 0 -0 0.051521</pose>
-    </model>
+      <pose frame=''>0.469332 0.417521 0.1 0 -0 0.051521</pose>
+    </model> -->
+    <!-- <include>
+      <uri>model://race_part</uri>
+      <pose>0.64 -0.37 1.165 0 0 -1.57</pose>
+    </include> -->
   </world>
 </sdf>

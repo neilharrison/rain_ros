@@ -1,0 +1,37 @@
+{
+    "configurations": [
+        {
+            "browse": {
+                "databaseFilename": "",
+                "limitSymbolsToIncludedHeaders": true
+            },
+            "includePath": [
+                "/home/neil/catkin_ws/devel/include/**",
+                "/opt/ros/melodic/include/**",
+                "/home/neil/catkin_ws/src/ros_canopen/canopen_402/include/**",
+                "/home/neil/catkin_ws/src/ros_canopen/canopen_chain_node/include/**",
+                "/home/neil/catkin_ws/src/ros_canopen/canopen_master/include/**",
+                "/home/neil/catkin_ws/src/ros_canopen/canopen_motor_node/include/**",
+                "/home/neil/catkin_ws/src/moveit_jog_arm/include/**",
+                "/home/neil/catkin_ws/src/neil_path_planning/include/**",
+                "/home/neil/catkin_ws/src/robotiq/robotiq_2f_gripper_action_server/include/**",
+                "/home/neil/catkin_ws/src/robotiq/robotiq_2f_gripper_control/include/**",
+                "/home/neil/catkin_ws/src/robotiq/robotiq_3f_gripper_articulated_gazebo_plugins/include/**",
+                "/home/neil/catkin_ws/src/robotiq/robotiq_3f_gripper_control/include/**",
+                "/home/neil/catkin_ws/src/robotiq/robotiq_ethercat/include/**",
+                "/home/neil/catkin_ws/src/robotiq/robotiq_ft_sensor/include/**",
+                "/home/neil/catkin_ws/src/ros_canopen/socketcan_bridge/include/**",
+                "/home/neil/catkin_ws/src/ros_canopen/socketcan_interface/include/**",
+                "/home/neil/catkin_ws/src/universal_robot/ur_kinematics/include/**",
+                "/home/neil/catkin_ws/src/ur_modern_driver/include/**",
+                "/usr/include/**"
+            ],
+            "name": "ROS",
+            "intelliSenseMode": "gcc-x64",
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "c11",
+            "cppStandard": "c++17"
+        }
+    ],
+    "version": 4
+}

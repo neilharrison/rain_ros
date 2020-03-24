@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<sdf version="1.6">
+  <model name="race_part">
+    <pose>0 0 0.5 0 0 0</pose>
+    <static>true</static>
+    <link name="link">
+      <inertial>
+        <pose> 0.470355 -0.25403 0.110614 </pose>
+        <mass>1032</mass>
+        <inertia> <!-- inertias are tricky to compute -->
+          <!-- http://gazebosim.org/tutorials?tut=inertia&cat=build_robot -->
+          <ixx>33.26</ixx>       <!-- for a box: ixx = 0.083 * mass * (y*y + z*z) -->
+          <ixy>-0.01831</ixy>         <!-- for a box: ixy = 0 -->
+          <ixz>-2.071</ixz>         <!-- for a box: ixz = 0 -->
+          <iyy>87.39</iyy>       <!-- for a box: iyy = 0.083 * mass * (x*x + z*z) -->
+          <iyz>0.004113</iyz>         <!-- for a box: iyz = 0 -->
+          <izz>102</izz>       <!-- for a box: izz = 0.083 * mass * (x*x + y*y) -->
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://race_part/meshes/race_part_nofasteners_org.stl</uri>
+            <scale>0.001 0.001 0.001</scale>
+          </mesh>
+        </geometry>
+        <pose> 0.470355 -0.25403 0.110614 </pose>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <mesh>
+            <uri>model://race_part/meshes/race_part_nofasteners_org.stl</uri>
+            <scale>0.001 0.001 0.001</scale>
+          </mesh>
+        </geometry>
+        <material>
+            <script>
+                <uri>file://media/materials/scripts/gazebo.material</uri>
+                <name>Gazebo/Grey</name>
+            </script>
+        </material>
+        <pose> 0.470355 -0.25403 0.110614 </pose>
+      </visual>
+    </link>
+  </model>
+</sdf>
