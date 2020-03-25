@@ -3,7 +3,7 @@
 
   <!-- (0) SETTING PARAMETERS -->
   <arg name="limited" default="false"  doc="If true, limits joint range [-PI, PI] on all joints." />
-  <arg name="paused" default="true" doc="Starts gazebo in paused mode" />
+  <arg name="paused" default="false" doc="Starts gazebo in paused mode" />
   <arg name="gui" default="true" doc="Starts gazebo gui" />
   <arg name="gripper" default="none" doc="Choose either 'none', 'robotiq_3f'." />
   <arg name="camera" default="false" doc="If true, you will have three 2D cameras" />
